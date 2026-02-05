@@ -2,7 +2,7 @@
 
 ## 현재 진행 중
 
-- [ ] CODE-REVIEW 스킬 검증 (Phase 3 코드 리뷰)
+없음
 
 ## 대기 중
 
@@ -45,3 +45,6 @@
   - [x] Frontend: Notion 임포트 모달 UI
   - [x] 블록 타입 매핑 (Notion → 애플리케이션)
   - [x] MCP API 문서화
+- [x] CODE-REVIEW 스킬 검증
+  - [x] Phase 3 코드 리뷰 완료
+  - [x] 중요 이슈 수정 (인덱스 추가, 순환 참조 방지, 검증 강화)

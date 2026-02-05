@@ -12,6 +12,7 @@ from app.database import get_db
 from app.schemas.mcp import NotionImportRequest, NotionImportResponse
 from app.services.mcp_notion import get_notion_service, NotionService
 from app.models import Page, Block
+from app.config import settings
 
 
 router = APIRouter(prefix="/api/mcp", tags=["MCP"])
@@ -39,6 +40,15 @@ def import_notion_page(
             - 502: Notion API 에러
     """
     try:
+        # Validate API key first
+        try:
+            api_key = settings.get_notion_api_key()
+        except ValueError as e:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail=str(e)
+            )
+
         # Notion 서비스 초기화
         try:
             notion_service = get_notion_service()

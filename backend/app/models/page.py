@@ -11,7 +11,7 @@ class Page(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(500), nullable=False, default="Untitled")
     icon = Column(String(10), nullable=True)  # Emoji
-    parent_id = Column(Integer, ForeignKey("pages.id", ondelete="CASCADE"), nullable=True)
+    parent_id = Column(Integer, ForeignKey("pages.id", ondelete="CASCADE"), nullable=True, index=True)  # Index for query performance
     user_id = Column(Integer, nullable=True)  # FK to users table (not implemented yet)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())

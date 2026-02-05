@@ -7,7 +7,8 @@
       "Bash(test:*)",
       "Bash(done)",
       "Bash(.venvScriptspython.exe -m pip install notion-client pydantic-settings)",
-      "Bash(.venv/Scripts/python.exe -m pip install:*)"
+      "Bash(.venv/Scripts/python.exe -m pip install:*)",
+      "Bash(findstr:*)"
     ]
   }
 }

@@ -232,6 +232,45 @@
 
 ---
 
+## [2026-02-05 21:15] 세션 작업 내역
+
+### 변경된 파일
+
+**Backend:**
+- `backend/app/config.py`: Settings 클래스에 Notion API 키 검증 메서드 추가
+  - `validate_notion_api_key()`: API 키 유효성 검증
+  - `get_notion_api_key()`: API 키 반환 및 명확한 에러 메시지 제공
+- `backend/app/models/page.py`: parent_id 컬럼에 인덱스 추가 (쿼리 성능 최적화)
+- `backend/app/models/block.py`: page_id, order 컬럼에 인덱스 추가 (쿼리 및 정렬 성능 최적화)
+- `backend/app/routers/mcp.py`: API 키 검증 로직 추가 (401 에러 반환)
+- `backend/app/routers/pages.py`:
+  - `is_descendant()` 함수 추가: 순환 참조 방지 로직
+  - `update_page()` 엔드포인트 개선: 자기 자신을 부모로 설정 방지, 자손을 부모로 설정 방지
+  - `delete_page()` 엔드포인트 개선: 예외 처리 및 트랜잭션 롤백 추가
+
+**Configuration:**
+- `.claude/settings.local.json`: Bash 명령어 권한 업데이트 (findstr 추가)
+
+### 작업 요약
+- 코드 리뷰 결과 반영: 중요 이슈 해결
+- 데이터베이스 성능 최적화:
+  - page_id, parent_id, order 컬럼에 인덱스 추가
+  - 외래 키 조인 성능 개선
+  - 정렬 쿼리 성능 개선
+- 순환 참조 방지:
+  - is_descendant() 헬퍼 함수 구현
+  - 부모-자식 관계 변경 시 순환 참조 검증
+  - 자기 자신을 부모로 설정하는 것 방지
+- 환경 설정 검증 강화:
+  - Notion API 키 검증 메서드 추가
+  - 명확한 에러 메시지 제공 (API 키 없을 시)
+  - MCP 엔드포인트에서 선제적 검증
+- 에러 핸들링 개선:
+  - delete_page() 트랜잭션 롤백 추가
+  - 예외 처리 강화
+
+---
+
 ## 다음 스텝
 - [x] 문서화 프로세스 검증 (README 작성)
 - [x] 실제 기능 개발 테스트 (BE → FE → Review 순서)
