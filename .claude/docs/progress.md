@@ -1,5 +1,26 @@
 # Progress Log
 
+## [2026-02-05 16:00] 세션 작업 내역
+
+### 변경된 파일
+- `CLAUDE.md`: review-agent 추가, 작업 순서에 코드 리뷰 단계 추가, 에이전트 협업 규칙 업데이트
+- `.claude/agents/review-agent.md`: 신규 생성 - 코드 리뷰 전담 에이전트 정의
+- `.claude/skills/CODE-REVIEW/`: 신규 생성 - 코드 리뷰 스킬 및 가이드라인 추가
+  - `SKILL.md`: 코드 리뷰 스킬 정의 및 워크플로우
+  - `references/checklist.md`: 공통 체크리스트
+  - `references/backend-guide.md`: 백엔드 리뷰 가이드
+  - `references/frontend-guide.md`: 프론트엔드 리뷰 가이드
+  - `references/security.md`: 보안 검토 가이드
+- `.claude/docs/progress.md`: 현재 세션 작업 내역 업데이트
+
+### 작업 요약
+- review-agent 에이전트 추가: 코드 품질, 보안, 성능 검토 전담
+- CODE-REVIEW 스킬 구현: 체계적인 코드 리뷰 프로세스 정립
+- 에이전트 워크플로우 확장: BE → FE → Review (선택적) 순서 확립
+- 읽기 전용 에이전트 개념 도입: review-agent는 코드를 수정하지 않고 개선 제안만 제공
+
+---
+
 ## [2026-02-05 14:30] 세션 작업 내역
 
 ### 변경된 파일
@@ -17,6 +38,7 @@
 ---
 
 ## 다음 스텝
-- [ ] 실제 기능 개발 테스트 (BE → FE 순서)
-- [ ] 각 스킬 동작 검증
+- [ ] 실제 기능 개발 테스트 (BE → FE → Review 순서)
+- [ ] 각 스킬 동작 검증 (특히 CODE-REVIEW)
 - [ ] 에이전트 간 협업 플로우 테스트
+- [ ] review-agent 실전 테스트

@@ -78,23 +78,31 @@ SQLite 파일(`app.db`)은 backend 폴더에 생성됩니다. 서버 첫 실행 
 |----------|----------|--------|
 | `be-agent` | DB 모델, API 엔드포인트, 스키마, 비즈니스 로직 | BE-CRUD, BE-refactor, BE-TEST, BE-DEBUG |
 | `fe-agent` | 페이지, 컴포넌트, API 연동, 스타일링 | FE-CRUD, FE-page, FE-api |
+| `review-agent` | 코드 품질, 보안, 성능 검토 (읽기 전용) | CODE-REVIEW |
 
 ### 작업 순서 (권장)
 
 새 기능 개발 시 다음 순서로 진행합니다:
 
 ```
-1. BE (be-agent)  →  2. FE (fe-agent)
-   API 엔드포인트        화면/연동 구현
+1. BE (be-agent)  →  2. FE (fe-agent)  →  3. Review (선택적)
+   API 엔드포인트        화면/연동 구현         코드 리뷰
 ```
+
+**코드 리뷰 시점**:
+- PR 생성 전
+- 주요 기능 완성 후
+- 보안 검토가 필요할 때
+- 전체 코드베이스 감사
 
 ### 에이전트 간 협업 규칙
 
 1. **영역 침범 금지**: 각 에이전트는 자신의 담당 영역만 수정합니다.
    - be-agent는 `backend/app/` 하위 (models/, routers/, schemas/, services/ 등)만 수정
    - fe-agent는 `frontend/src/` 하위만 수정
+   - review-agent는 코드를 읽기만 하고 수정하지 않음 (개선 제안만 제공)
    - 설정 파일(main.py, database.py)은 필요시 수정 가능하지만 기본 구조 유지
 
 2. **다른 도메인 작업 발견 시**: 직접 수행하지 않고 메인 에이전트에게 보고하여 해당 에이전트 호출을 요청합니다.
 
-3. **작업 완료 보고**: 각 에이전트는 작업 완료 시 수정한 파일 목록을 반환합니다.
+3. **작업 완료 보고**: 각 에이전트는 작업 완료 시 수정한 파일 목록 또는 리뷰 결과를 반환합니다.
