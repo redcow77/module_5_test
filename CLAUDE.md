@@ -77,8 +77,9 @@ SQLite 파일(`app.db`)은 backend 폴더에 생성됩니다. 서버 첫 실행 
 | 에이전트 | 담당 영역 | Skills |
 |----------|----------|--------|
 | `be-agent` | DB 모델, API 엔드포인트, 스키마, 비즈니스 로직 | BE-CRUD, BE-refactor, BE-TEST, BE-DEBUG |
-| `fe-agent` | 페이지, 컴포넌트, API 연동, 스타일링 | FE-CRUD, FE-page, FE-api |
+| `fe-agent` | 페이지, 컴포넌트, API 연동, 스타일링, 테스트, 디버깅 | FE-CRUD, FE-page, FE-api, FE-TEST, FE-DEBUG |
 | `review-agent` | 코드 품질, 보안, 성능 검토 (읽기 전용) | CODE-REVIEW |
+| (메인 에이전트) | 문서 작성 및 관리 | DOCS |
 
 ### 작업 순서 (권장)
 

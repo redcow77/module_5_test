@@ -1,5 +1,39 @@
 # Progress Log
 
+## [2026-02-05 11:03] 세션 작업 내역
+
+### 변경된 파일
+- `.claude/agents/fe-agent.md`: FE-TEST, FE-DEBUG 스킬 추가 및 담당 업무 확장
+- `.claude/settings.local.json`: Bash 권한 추가 (dir, test, done 명령어)
+- `CLAUDE.md`: 에이전트 테이블 업데이트 - fe-agent 스킬 목록 추가, DOCS 스킬 추가
+- `.claude/skills/DOCS/`: 신규 생성 - 문서 작성 스킬 추가
+  - `SKILL.md`: 문서 작성 워크플로우 및 가이드라인
+  - `references/readme-guide.md`: README 작성 가이드
+  - `references/api-docs-guide.md`: API 문서 작성 가이드
+  - `references/changelog-guide.md`: CHANGELOG 작성 가이드
+  - `references/user-guide-template.md`: 사용자 가이드 템플릿
+- `.claude/skills/FE-DEBUG/`: 신규 생성 - 프론트엔드 디버깅 스킬
+  - `SKILL.md`: 디버깅 워크플로우
+  - `references/nextjs-errors.md`: Next.js 에러 해결 가이드
+  - `references/react-issues.md`: React 이슈 해결 가이드
+  - `references/typescript-errors.md`: TypeScript 에러 가이드
+  - `references/console-errors.md`: 콘솔 에러 해결 방법
+- `.claude/skills/FE-TEST/`: 신규 생성 - 프론트엔드 테스트 스킬
+  - `SKILL.md`: 테스트 작성 워크플로우
+  - `references/setup.md`: 테스트 환경 설정
+  - `references/component-testing.md`: 컴포넌트 테스트 가이드
+  - `references/integration-testing.md`: 통합 테스트 가이드
+  - `references/commands.md`: 테스트 명령어 정리
+
+### 작업 요약
+- fe-agent 역할 확장: 테스트 코드 작성 및 디버깅 기능 추가
+- DOCS 스킬 추가: 체계적인 문서 작성 프로세스 정립
+- FE-TEST 스킬 구현: Jest, React Testing Library 기반 테스트 가이드
+- FE-DEBUG 스킬 구현: Next.js, React, TypeScript 에러 해결 가이드
+- Bash 권한 확장: 테스트 및 디렉토리 명령어 실행 가능
+
+---
+
 ## [2026-02-05 16:00] 세션 작업 내역
 
 ### 변경된 파일
@@ -39,6 +73,8 @@
 
 ## 다음 스텝
 - [ ] 실제 기능 개발 테스트 (BE → FE → Review 순서)
-- [ ] 각 스킬 동작 검증 (특히 CODE-REVIEW)
+- [ ] 각 스킬 동작 검증 (FE-TEST, FE-DEBUG, DOCS, CODE-REVIEW)
 - [ ] 에이전트 간 협업 플로우 테스트
 - [ ] review-agent 실전 테스트
+- [ ] 프론트엔드 테스트 환경 구축 (Jest, React Testing Library)
+- [ ] 문서화 프로세스 검증 (README, API Docs 작성)

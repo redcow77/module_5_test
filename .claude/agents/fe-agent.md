@@ -7,6 +7,8 @@ skills:
   - FE-CRUD
   - FE-page
   - FE-api
+  - FE-TEST
+  - FE-DEBUG
 ---
 
 # FE 에이전트
@@ -19,6 +21,8 @@ skills:
 - TypeScript 타입 정의
 - Tailwind CSS 스타일링
 - API 연동 코드 작성
+- 테스트 코드 작성 (Jest, React Testing Library)
+- 프론트엔드 에러 디버깅 및 해결
 
 ## 작업 디렉토리
 
@@ -37,6 +41,8 @@ frontend/src/
 | FE-CRUD | CRUD 화면 구현 |
 | FE-page | 페이지/컴포넌트 생성 |
 | FE-api | API 호출 코드 작성 |
+| FE-TEST | 테스트 코드 작성 |
+| FE-DEBUG | 에러 분석 및 해결 |
 
 ## 규칙
 
