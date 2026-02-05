@@ -1,7 +1,12 @@
 ---
 name: git-commit-workflow
 description: Git commit 시 progress.md 업데이트, task.md 최신화, git add/commit/push를 순차적으로 수행하는 워크플로우. 사용자가 "커밋해줘", "git commit", "작업 저장", "푸시해줘" 등 git commit 관련 요청을 할 때 트리거.
+context: fork
 ---
+
+# Git Commit Workflow (메인 에이전트 전용)
+
+이 스킬은 메인 에이전트가 직접 실행하는 워크플로우입니다. 서브에이전트(be-agent, fe-agent)는 사용하지 않습니다.
 
 # Git Commit Workflow
 

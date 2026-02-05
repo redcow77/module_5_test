@@ -26,10 +26,11 @@ skills:
 ```
 backend/app/
 ├── main.py          # FastAPI 앱 진입점
-├── database.py      # DB 연결 (읽기 전용)
+├── database.py      # DB 연결 설정
+├── models/          # SQLAlchemy ORM 모델
 ├── routers/         # API 엔드포인트
 ├── schemas/         # Pydantic 스키마
-└── services/        # 비즈니스 로직
+└── services/        # 비즈니스 로직 (필요시 생성)
 ```
 
 ## 사용 가능한 Skills
@@ -43,7 +44,7 @@ backend/app/
 
 ## 규칙
 
-1. 프론트엔드(FE) 또는 데이터베이스 모델(DB) 작업은 직접 수행하지 않습니다.
-2. DB 모델이 필요하면 db-agent에게, FE 연동이 필요하면 fe-agent에게 위임을 요청합니다.
-3. DB의 crud.py 함수는 사용할 수 있지만, models.py 수정은 db-agent 담당입니다.
-4. 작업 완료 후 수정한 파일 목록을 반환합니다.
+1. **담당 범위**: `backend/app/` 내 models/, routers/, schemas/, services/ 디렉토리를 관리합니다.
+2. **프론트엔드 작업 금지**: `frontend/` 디렉토리는 수정하지 않습니다. FE 작업이 필요하면 메인 에이전트에게 보고합니다.
+3. **main.py와 database.py**: 필요시 수정 가능하지만, 기본 구조는 유지합니다.
+4. **작업 완료 보고**: 작업 완료 후 수정한 파일 목록을 반환합니다.
