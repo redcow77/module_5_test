@@ -13,7 +13,7 @@ export interface Page {
 export interface Block {
   id: number;
   page_id: number;
-  type: 'text' | 'heading1' | 'heading2' | 'heading3' | 'code' | 'quote';
+  type: 'text' | 'heading1' | 'heading2' | 'heading3' | 'bullet_list' | 'numbered_list' | 'todo' | 'code' | 'quote' | 'divider';
   content: string;
   order: number;
   created_at: string;
@@ -34,6 +34,23 @@ export interface UpdatePageRequest {
   title?: string;
   icon?: string | null;
   parent_id?: number | null;
+}
+
+export interface CreateBlockRequest {
+  page_id: number;
+  type: Block['type'];
+  content: string;
+  order: number;
+}
+
+export interface UpdateBlockRequest {
+  type?: Block['type'];
+  content?: string;
+  order?: number;
+}
+
+export interface ReorderBlocksRequest {
+  block_orders: { id: number; order: number }[];
 }
 
 // Error handling helper
@@ -96,4 +113,51 @@ export async function deletePage(id: number): Promise<void> {
     const error = await response.text();
     throw new Error(error || `HTTP error! status: ${response.status}`);
   }
+}
+
+// Create a new block
+export async function createBlock(data: CreateBlockRequest): Promise<Block> {
+  const response = await fetch('/api/blocks/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  return handleResponse<Block>(response);
+}
+
+// Update a block
+export async function updateBlock(
+  id: number,
+  data: UpdateBlockRequest
+): Promise<Block> {
+  const response = await fetch(`/api/blocks/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  return handleResponse<Block>(response);
+}
+
+// Delete a block
+export async function deleteBlock(id: number): Promise<void> {
+  const response = await fetch(`/api/blocks/${id}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(error || `HTTP error! status: ${response.status}`);
+  }
+}
+
+// Reorder blocks
+export async function reorderBlocks(
+  data: ReorderBlocksRequest
+): Promise<Block[]> {
+  const response = await fetch('/api/blocks/reorder', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  return handleResponse<Block[]>(response);
 }

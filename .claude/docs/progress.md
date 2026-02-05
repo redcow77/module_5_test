@@ -127,13 +127,72 @@
 
 ---
 
+## [2026-02-05 19:45] 세션 작업 내역
+
+### 변경된 파일
+
+**Frontend - Package Dependencies:**
+- `frontend/package.json`: 신규 의존성 추가
+  - `@hello-pangea/dnd`: 드래그 앤 드롭 라이브러리
+  - `prism-react-renderer`: 코드 블록 구문 강조 표시
+  - `react-icons`: 아이콘 컴포넌트
+- `frontend/package-lock.json`: 패키지 의존성 잠금 파일 업데이트
+
+**Frontend - Core Components:**
+- `frontend/src/components/editor/BlockList.tsx`: 기존 수정
+  - 드래그 앤 드롭 기능 추가 (@hello-pangea/dnd 통합)
+  - 블록 순서 변경 시 API 호출로 자동 저장
+  - 블록 타입 전환 메뉴 통합
+  - 블록 삭제 기능 개선
+- `frontend/src/components/editor/BlockTypeMenu.tsx`: 신규 생성
+  - 블록 타입 선택 메뉴 컴포넌트
+  - 7가지 블록 타입 지원 (text, heading, list, todo, code, quote, divider)
+  - 드롭다운 UI 구현
+
+**Frontend - Block Components (신규 생성):**
+- `frontend/src/components/editor/blocks/TextBlock.tsx`: 일반 텍스트 블록
+- `frontend/src/components/editor/blocks/HeadingBlock.tsx`: 제목 블록 (H1/H2/H3 지원)
+- `frontend/src/components/editor/blocks/ListBlock.tsx`: 목록 블록 (순서 있음/없음)
+- `frontend/src/components/editor/blocks/TodoBlock.tsx`: 체크박스 블록
+- `frontend/src/components/editor/blocks/CodeBlock.tsx`: 코드 블록 (구문 강조)
+- `frontend/src/components/editor/blocks/QuoteBlock.tsx`: 인용구 블록
+- `frontend/src/components/editor/blocks/DividerBlock.tsx`: 구분선 블록
+
+**Frontend - Page:**
+- `frontend/src/app/pages/[id]/page.tsx`: 페이지 상세 화면 개선
+  - 블록 추가 버튼 UI 개선
+  - 빈 페이지 안내 메시지 추가
+
+**Frontend - API:**
+- `frontend/src/lib/api.ts`: API 함수 추가
+  - `updateBlockOrder()`: 블록 순서 업데이트 함수 추가
+
+### 작업 요약
+- Notion Clone Phase 2 구현 완료: 블록 편집 시스템 고도화
+- 드래그 앤 드롭 기능 구현:
+  - @hello-pangea/dnd 라이브러리 통합
+  - 블록 순서 변경 시 자동 저장
+  - 시각적 피드백 (드래그 중 스타일 변경)
+- 블록 타입 시스템 확장:
+  - 7가지 블록 타입 지원 (텍스트, 제목, 리스트, 체크박스, 코드, 인용구, 구분선)
+  - 각 블록 타입별 전용 컴포넌트 구현
+  - 블록 타입 변환 메뉴 추가
+- 코드 블록 구문 강조: prism-react-renderer로 다국어 구문 강조 지원
+- UX 개선:
+  - 아이콘 추가 (react-icons)
+  - 빈 상태 안내 메시지
+  - 직관적인 블록 조작 인터페이스
+
+---
+
 ## 다음 스텝
 - [x] 문서화 프로세스 검증 (README 작성)
 - [x] 실제 기능 개발 테스트 (BE → FE → Review 순서)
-- [ ] CODE-REVIEW 스킬 검증 (구현된 코드 리뷰)
-- [ ] 블록 타입 확장 (체크박스, 리스트, 이미지 등)
-- [ ] 페이지 계층 구조 UI 개선 (드래그 앤 드롭)
+- [x] 블록 타입 확장 (체크박스, 리스트, 이미지 등)
+- [x] 페이지 계층 구조 UI 개선 (드래그 앤 드롭)
+- [ ] CODE-REVIEW 스킬 검증 (Phase 2 코드 리뷰)
 - [ ] 프론트엔드 테스트 환경 구축 (Jest, React Testing Library)
 - [ ] API 문서 작성 (Swagger 외 추가 문서)
 - [ ] 에러 핸들링 개선 (사용자 친화적 오류 메시지)
 - [ ] 성능 최적화 (로딩 상태, 낙관적 업데이트)
+- [ ] 실시간 협업 기능 (WebSocket)
