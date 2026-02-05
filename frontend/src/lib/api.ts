@@ -53,6 +53,19 @@ export interface ReorderBlocksRequest {
   block_orders: { id: number; order: number }[];
 }
 
+export interface ImportNotionRequest {
+  notion_page_id: string;
+  parent_id?: number | null;
+}
+
+export interface ImportNotionResponse {
+  page_id: number;
+  blocks_count: number;
+  notion_page_id: string;
+  title: string;
+  icon?: string;
+}
+
 // Error handling helper
 async function handleResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
@@ -160,4 +173,16 @@ export async function reorderBlocks(
     body: JSON.stringify(data),
   });
   return handleResponse<Block[]>(response);
+}
+
+// Import page from Notion
+export async function importNotionPage(
+  request: ImportNotionRequest
+): Promise<ImportNotionResponse> {
+  const response = await fetch('/api/mcp/import', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(request),
+  });
+  return handleResponse<ImportNotionResponse>(response);
 }

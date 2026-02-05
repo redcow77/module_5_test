@@ -4,12 +4,15 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { Page, listPages, createPage } from '@/lib/api';
+import ImportNotionModal from './ImportNotionModal';
 
 export default function Sidebar() {
   const [pages, setPages] = useState<Page[]>([]);
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
   const [expandedIds, setExpandedIds] = useState<Set<number>>(new Set());
+  const [isImportModalOpen, setIsImportModalOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
   const router = useRouter();
   const pathname = usePathname();
 
@@ -55,6 +58,16 @@ export default function Sidebar() {
       }
       return next;
     });
+  }
+
+  function handleImportSuccess(pageId: number, title: string) {
+    // Show success toast
+    setToastMessage(`Successfully imported "${title}"`);
+    setTimeout(() => setToastMessage(''), 3000);
+
+    // Reload pages and navigate
+    loadPages();
+    router.push(`/pages/${pageId}`);
   }
 
   // Build hierarchical tree
@@ -143,7 +156,14 @@ export default function Sidebar() {
         )}
       </div>
 
-      <div className="p-2 border-t border-gray-200">
+      <div className="p-2 border-t border-gray-200 space-y-1">
+        <button
+          onClick={() => setIsImportModalOpen(true)}
+          className="w-full flex items-center gap-2 px-2 py-1.5 text-sm text-gray-600 hover:bg-gray-100 rounded"
+        >
+          <span>📥</span>
+          <span>Import from Notion</span>
+        </button>
         <button
           onClick={handleCreatePage}
           disabled={creating}
@@ -153,6 +173,23 @@ export default function Sidebar() {
           <span>{creating ? 'Creating...' : 'New Page'}</span>
         </button>
       </div>
+
+      {/* Import Modal */}
+      <ImportNotionModal
+        isOpen={isImportModalOpen}
+        onClose={() => setIsImportModalOpen(false)}
+        onSuccess={handleImportSuccess}
+      />
+
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed bottom-4 right-4 bg-green-600 text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 z-50">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+          <span>{toastMessage}</span>
+        </div>
+      )}
     </div>
   );
 }

@@ -2,11 +2,11 @@
 
 ## 현재 진행 중
 
-- [ ] CODE-REVIEW 스킬 검증 (Phase 2 코드 리뷰)
+- [ ] CODE-REVIEW 스킬 검증 (Phase 3 코드 리뷰)
 
 ## 대기 중
 
-- [ ] Phase 3 기능 개발
+- [ ] Phase 4 기능 개발
   - [ ] 이미지 블록 구현 (업로드 및 임베딩)
   - [ ] 실시간 동기화 (WebSocket)
   - [ ] 페이지 공유 및 권한 관리
@@ -39,3 +39,9 @@
   - [x] 드래그 앤 드롭 블록 정렬
   - [x] 블록 타입 변환 메뉴
   - [x] 코드 블록 구문 강조
+- [x] Notion Clone Phase 3 구현
+  - [x] MCP Notion API 통합
+  - [x] Backend: Notion 임포트 서비스 및 API 엔드포인트
+  - [x] Frontend: Notion 임포트 모달 UI
+  - [x] 블록 타입 매핑 (Notion → 애플리케이션)
+  - [x] MCP API 문서화

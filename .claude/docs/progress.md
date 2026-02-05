@@ -185,12 +185,60 @@
 
 ---
 
+## [2026-02-05 20:30] 세션 작업 내역
+
+### 변경된 파일
+
+**Backend:**
+- `backend/requirements.txt`: httpx 의존성 추가 (MCP API 통신용)
+- `backend/.env.example`: 신규 생성 - Notion API 환경 변수 템플릿
+- `backend/app/config.py`: 신규 생성 - 환경 변수 관리 (Pydantic Settings)
+- `backend/app/schemas/__init__.py`: NotionImportRequest, NotionImportResponse export 추가
+- `backend/app/schemas/mcp.py`: 신규 생성 - Notion 임포트 스키마 정의
+- `backend/app/services/`: 신규 디렉토리 생성
+- `backend/app/services/__init__.py`: NotionImportService export
+- `backend/app/services/notion_import.py`: 신규 생성 - Notion 페이지 임포트 비즈니스 로직
+- `backend/app/routers/mcp.py`: 신규 생성 - Notion 임포트 API 엔드포인트
+- `backend/app/main.py`: mcp 라우터 등록 및 NotionImportRequest/Response 임포트
+- `backend/test_mcp_import.py`: 신규 생성 - MCP API 통합 테스트 스크립트
+- `backend/MCP_API_GUIDE.md`: 신규 생성 - MCP Notion API 연동 가이드
+- `backend/README_MCP.md`: 신규 생성 - Notion 임포트 기능 상세 문서
+
+**Frontend:**
+- `frontend/src/lib/api.ts`: importNotionPage() API 함수 추가
+- `frontend/src/components/layout/Sidebar.tsx`: "Notion에서 가져오기" 버튼 추가
+- `frontend/src/components/layout/ImportNotionModal.tsx`: 신규 생성 - Notion 임포트 모달 컴포넌트
+
+**Configuration:**
+- `.claude/settings.local.json`: Bash 명령어 권한 업데이트 (cd 제거)
+
+### 작업 요약
+- Notion Clone Phase 3 구현 완료: MCP Notion API 통합
+- 백엔드 MCP 연동:
+  - NotionImportService: MCP API를 통한 Notion 페이지 가져오기 로직
+  - 계층 구조 변환: Notion 블록 → 애플리케이션 블록 매핑
+  - 블록 타입 매핑: paragraph, heading, bulleted_list, code 등 지원
+  - 환경 변수 관리: Pydantic Settings 패턴 적용
+- 프론트엔드 UI 구현:
+  - ImportNotionModal: Notion 페이지 ID 입력 모달
+  - 사이드바에 임포트 버튼 추가
+  - 로딩 상태 및 에러 핸들링
+- API 문서화:
+  - MCP_API_GUIDE.md: MCP 서버 설정 및 API 사용법
+  - README_MCP.md: Notion 임포트 기능 전체 가이드
+  - 환경 설정 예제 (.env.example)
+- 테스트 스크립트 작성:
+  - test_mcp_import.py: API 엔드포인트 통합 테스트
+
+---
+
 ## 다음 스텝
 - [x] 문서화 프로세스 검증 (README 작성)
 - [x] 실제 기능 개발 테스트 (BE → FE → Review 순서)
 - [x] 블록 타입 확장 (체크박스, 리스트, 이미지 등)
 - [x] 페이지 계층 구조 UI 개선 (드래그 앤 드롭)
-- [ ] CODE-REVIEW 스킬 검증 (Phase 2 코드 리뷰)
+- [x] MCP Notion API 통합 (Phase 3)
+- [ ] CODE-REVIEW 스킬 검증 (Phase 3 코드 리뷰)
 - [ ] 프론트엔드 테스트 환경 구축 (Jest, React Testing Library)
 - [ ] API 문서 작성 (Swagger 외 추가 문서)
 - [ ] 에러 핸들링 개선 (사용자 친화적 오류 메시지)
