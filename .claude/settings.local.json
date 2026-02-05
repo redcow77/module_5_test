@@ -8,7 +8,14 @@
       "Bash(done)",
       "Bash(.venvScriptspython.exe -m pip install notion-client pydantic-settings)",
       "Bash(.venv/Scripts/python.exe -m pip install:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(.venvScriptsactivate)",
+      "Bash(timeout /t 3)",
+      "Bash(.venv/Scripts/python.exe:*)",
+      "Bash(.venv/Scripts/pip.exe install:*)",
+      "Bash(\".venv\\\\Scripts\\\\python.exe\" -c \"from app.routers import system_logs; from app.services import log_analytics; print\\(''Import successful''\\)\")",
+      "Bash(.venvScriptspython.exe generate_dummy_logs.py --days 7 --logs-per-day 200 --clear)",
+      "Bash(.venvScriptspip.exe install anthropic)"
     ]
   }
 }

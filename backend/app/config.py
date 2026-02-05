@@ -2,6 +2,12 @@
 환경 변수 설정 관리 모듈
 
 Notion API 키와 같은 민감한 정보를 .env 파일에서 읽어옵니다.
+
+.env 파일 설정 예시:
+NOTION_API_KEY=your_notion_api_key_here
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+
+참고: ANTHROPIC_API_KEY는 AI 메모장 기능 사용 시 필요합니다.
 """
 
 from pydantic_settings import BaseSettings
@@ -16,6 +22,7 @@ class Settings(BaseSettings):
     .env 파일에서 자동으로 환경 변수를 읽어옵니다.
     """
     notion_api_key: Optional[str] = None  # Notion Integration API 키
+    anthropic_api_key: Optional[str] = None  # Anthropic Claude API 키
 
     class Config:
         env_file = ".env"
