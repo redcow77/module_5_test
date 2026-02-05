@@ -86,11 +86,54 @@
 
 ---
 
+## [2026-02-05 18:30] 세션 작업 내역
+
+### 변경된 파일
+
+**Backend:**
+- `backend/app/main.py`: pages, blocks 라우터 등록 및 Page, Block 모델 임포트
+- `backend/app/models/__init__.py`: Page, Block 모델 export 추가
+- `backend/app/models/page.py`: 신규 생성 - Page 모델 정의 (제목, 아이콘, 계층 구조)
+- `backend/app/models/block.py`: 신규 생성 - Block 모델 정의 (컨텐츠 블록, 타입별 지원)
+- `backend/app/schemas/__init__.py`: Page, Block 스키마 export 추가
+- `backend/app/schemas/page.py`: 신규 생성 - Page CRUD 스키마 정의
+- `backend/app/schemas/block.py`: 신규 생성 - Block CRUD 스키마 정의
+- `backend/app/routers/pages.py`: 신규 생성 - Page CRUD API 엔드포인트 구현
+- `backend/app/routers/blocks.py`: 신규 생성 - Block CRUD API 엔드포인트 구현
+
+**Frontend:**
+- `frontend/src/app/layout.tsx`: Geist 폰트 적용 및 메타데이터 업데이트
+- `frontend/src/app/page.tsx`: 홈 화면 구현 - 페이지 목록 조회 및 신규 페이지 생성
+- `frontend/src/app/pages/[id]/page.tsx`: 신규 생성 - 페이지 상세 화면 (블록 편집 포함)
+- `frontend/src/components/BlockEditor.tsx`: 신규 생성 - 블록 편집기 컴포넌트
+- `frontend/src/components/Sidebar.tsx`: 신규 생성 - 네비게이션 사이드바
+- `frontend/src/lib/api.ts`: 신규 생성 - API 통신 함수 및 타입 정의
+
+### 작업 요약
+- Notion Clone Phase 1 기능 구현 완료
+- 백엔드 API 엔드포인트 구현:
+  - Page CRUD (생성, 조회, 수정, 삭제)
+  - Block CRUD (컨텐츠 블록 관리)
+  - 계층 구조 지원 (부모-자식 페이지)
+  - 순서 관리 (블록 정렬)
+- 프론트엔드 UI 구현:
+  - 페이지 목록 화면
+  - 페이지 상세 편집 화면
+  - 블록 단위 컨텐츠 편집
+  - 사이드바 네비게이션
+  - 반응형 디자인 (Tailwind CSS)
+- 타입 안정성 확보 (TypeScript 인터페이스 정의)
+- API 프록시 설정 완료 (Next.js rewrites)
+
+---
+
 ## 다음 스텝
 - [x] 문서화 프로세스 검증 (README 작성)
-- [ ] 실제 기능 개발 테스트 (BE → FE → Review 순서)
-- [ ] 각 스킬 동작 검증 (FE-TEST, FE-DEBUG, DOCS, CODE-REVIEW)
-- [ ] 에이전트 간 협업 플로우 테스트
-- [ ] review-agent 실전 테스트
+- [x] 실제 기능 개발 테스트 (BE → FE → Review 순서)
+- [ ] CODE-REVIEW 스킬 검증 (구현된 코드 리뷰)
+- [ ] 블록 타입 확장 (체크박스, 리스트, 이미지 등)
+- [ ] 페이지 계층 구조 UI 개선 (드래그 앤 드롭)
 - [ ] 프론트엔드 테스트 환경 구축 (Jest, React Testing Library)
 - [ ] API 문서 작성 (Swagger 외 추가 문서)
+- [ ] 에러 핸들링 개선 (사용자 친화적 오류 메시지)
+- [ ] 성능 최적화 (로딩 상태, 낙관적 업데이트)

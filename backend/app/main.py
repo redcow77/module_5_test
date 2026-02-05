@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import engine, Base
-from app.routers import examples
+from app.routers import examples, pages, blocks
+from app.models import Page, Block  # Import for table creation
 
 # 데이터베이스 테이블 생성
 Base.metadata.create_all(bind=engine)
@@ -20,6 +21,8 @@ app.add_middleware(
 
 # 라우터 등록
 app.include_router(examples.router)
+app.include_router(pages.router)
+app.include_router(blocks.router)
 
 
 @app.get("/api/health")
